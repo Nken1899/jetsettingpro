@@ -1,9 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useState, useEffect } from "react";
-import axios from "axios";
-
 export default function JetSettingProHome() {
   const [email, setEmail] = useState("");
   const [products, setProducts] = useState([]);
@@ -28,42 +22,14 @@ export default function JetSettingProHome() {
   };
 
   return (
-    <div className="p-6 space-y-8">
-      <header className="text-center">
-        <h1 className="text-4xl font-bold">JetSettingPro.com</h1>
-        <p className="text-lg mt-2">Your guide to smarter, lighter, and better travel</p>
-      </header>
-
-      <section className="grid md:grid-cols-3 gap-6">
-        <Card>
-          <CardContent className="p-4">
-            <h2 className="text-xl font-semibold mb-2">Gear Guides</h2>
-            <p>Discover the best travel gear for every type of journey — from backpacks to portable tech.</p>
-            <Button className="mt-4 w-full">Explore Gear</Button>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <h2 className="text-xl font-semibold mb-2">Travel Tips</h2>
-            <p>Expert advice on packing, planning, and saving money while exploring the world.</p>
-            <Button className="mt-4 w-full">Read Tips</Button>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <h2 className="text-xl font-semibold mb-2">Destination Highlights</h2>
-            <p>In-depth guides to must-see places, hidden gems, and culturally rich experiences.</p>
-            <Button className="mt-4 w-full">See Destinations</Button>
-          </CardContent>
-        </Card>
-      </section>
-
-      <section className="text-center mt-12">
-        <h3 className="text-2xl font-medium">Join the JetSettingPro Club</h3>
-        <p className="mb-4">Get weekly travel hacks, gear reviews, and exclusive tips straight to your inbox.</p>
-        <div className="flex justify-center gap-2 max-w-md mx-auto">
+    <div className="px-6 py-12 space-y-16 font-sans bg-white text-gray-800">
+      {/* Hero Section */}
+      <section className="text-center max-w-3xl mx-auto space-y-4">
+        <h1 className="text-5xl font-extrabold tracking-tight text-gray-900">JetSettingPro</h1>
+        <p className="text-xl text-gray-600">
+          Your ultimate guide to luxury travel, curated gear, and elevated experiences.
+        </p>
+        <div className="mt-6 flex justify-center gap-2 max-w-md mx-auto">
           <Input
             type="email"
             placeholder="Enter your email"
@@ -71,20 +37,51 @@ export default function JetSettingProHome() {
             onChange={(e) => setEmail(e.target.value)}
           />
           <Button onClick={handleSubscribe} disabled={subscribed}>
-            {subscribed ? "Subscribed!" : "Subscribe"}
+            {subscribed ? "Subscribed!" : "Join Now"}
           </Button>
         </div>
+        <p className="text-sm text-gray-500">Join our club for exclusive tips & gear guides.</p>
       </section>
 
-      <section className="mt-16">
-        <h3 className="text-2xl font-medium text-center mb-6">Recommended Travel Products</h3>
+      {/* Feature Highlights */}
+      <section className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {[
+          {
+            title: "Luxury Travel Gear",
+            desc: "Discover the finest carry-ons, tech, and essentials for elevated journeys.",
+            cta: "Explore Gear",
+          },
+          {
+            title: "Insider Travel Tips",
+            desc: "Smart strategies for smooth, stylish, and affordable global adventures.",
+            cta: "Read Tips",
+          },
+          {
+            title: "Elite Destinations",
+            desc: "From hidden gems to 5-star resorts, explore the world's most inspiring escapes.",
+            cta: "See Places",
+          },
+        ].map((item, idx) => (
+          <Card key={idx}>
+            <CardContent className="p-6">
+              <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
+              <p className="text-gray-600">{item.desc}</p>
+              <Button className="mt-4 w-full">{item.cta}</Button>
+            </CardContent>
+          </Card>
+        ))}
+      </section>
+
+      {/* Featured Products */}
+      <section className="max-w-6xl mx-auto">
+        <h3 className="text-2xl font-bold text-center mb-6">Recommended Travel Gear</h3>
         <div className="grid md:grid-cols-3 gap-6">
           {products.map((product, index) => (
             <Card key={index}>
               <CardContent className="p-4">
-                <img src={product.image} alt={product.title} className="mb-2 w-full h-48 object-cover" />
-                <h4 className="text-lg font-semibold mb-2">{product.title}</h4>
-                <p>{product.price}</p>
+                <img src={product.image} alt={product.title} className="w-full h-48 object-cover mb-3 rounded-lg" />
+                <h4 className="text-lg font-semibold mb-1">{product.title}</h4>
+                <p className="text-gray-600">{product.price}</p>
                 <Button className="mt-4 w-full" asChild>
                   <a href={product.link} target="_blank" rel="noopener noreferrer">
                     View on Amazon
@@ -95,6 +92,11 @@ export default function JetSettingProHome() {
           ))}
         </div>
       </section>
+
+      {/* Footer (Coming Soon) */}
+      <footer className="text-center text-sm text-gray-400 pt-12 border-t">
+        <p>&copy; {new Date().getFullYear()} JetSettingPro. All rights reserved.</p>
+      </footer>
     </div>
   );
 }
