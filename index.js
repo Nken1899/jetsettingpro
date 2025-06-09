@@ -1,1 +1,1 @@
-export { default } from '../components/JetSettingProHome';
+export { default } from '../components/Home';
