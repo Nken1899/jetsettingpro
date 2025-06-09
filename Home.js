@@ -35,9 +35,4 @@ export default function Home() {
           style={{ padding: "0.5rem", marginRight: "0.5rem" }}
         />
         <button onClick={handleSubscribe} disabled={subscribed}>
-          {subscribed ? "Subscribed!" : "Subscribe"}
-        </button>
-      </div>
-    </main>
-  );
-}
+          {subscribed ? "Subscri
